@@ -1,0 +1,13 @@
+
+#UNREAL ENGINE GENERATED FILES
+
+Intermediate/
+Binaries/
+Saved/
+DerivedDataCache/
+Build/
+Content/StarterContent/
+
+#VISUAL STUDIO GENERATED FILES
+*VC.db
+*.opendb

@@ -23,16 +23,20 @@ void UOpenDoorComp::BeginPlay()
 
 	// ...
 	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
-
+	Owner = GetOwner();
 	
 }
 
 void UOpenDoorComp::OpenDoor() {
-	AActor* Owner = GetOwner();
-
-	FRotator newRotation = FRotator(0.0f, 60.0f, 0.0f);
-	Owner->SetActorRotation(newRotation);
+	
+	Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
 }
+
+void UOpenDoorComp::CloseDoor() {
+
+	Owner->SetActorRotation(FRotator(0.0f, 0.0f, 0.0f));
+}
+
 
 // Called every frame
 void UOpenDoorComp::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -42,7 +46,13 @@ void UOpenDoorComp::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 	if (PressurePlate->IsOverlappingActor(ActorThatOpens)) {
 		OpenDoor();
+		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
 	}
+	else if (LastDoorOpenTime + DoorClosedDelay < GetWorld()->GetTimeSeconds()) {
+		CloseDoor();
+	}
+
+	//Check if its time to close the door
 
 }
 

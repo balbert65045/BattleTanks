@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class BuildingEscape : ModuleRules
+public class BuildingEscape2 : ModuleRules
 {
-	public BuildingEscape(ReadOnlyTargetRules Target) : base(Target)
+	public BuildingEscape2(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	

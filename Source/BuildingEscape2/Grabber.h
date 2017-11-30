@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Components/InputComponent.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Grabber.generated.h"
@@ -29,5 +31,10 @@ private:
 	UPROPERTY(EditAnywhere)
 		float Reach = 100.0f;
 
-	
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+	UInputComponent* InputComponent = nullptr;
+
+	//Raycast and Grab whats in reach
+	void Grab();
+
 };

@@ -25,16 +25,28 @@ void UGrabber::BeginPlay()
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("%s is reporting for duty"), *GetOwner()->GetName());
 	// ...
-	
+
+	///Look for physics handle
+	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+	if (PhysicsHandle == nullptr) {
+		UE_LOG(LogTemp, Error, TEXT("No physics handle attached to %s"), *GetOwner()->GetName());
+	}
+
+	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (InputComponent) {
+		///Bind the input axis
+		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+	}
+	else{
+		UE_LOG(LogTemp, Error, TEXT("No Input Component attached to %s"), *GetOwner()->GetName());
+	}
+
 }
 
 
-// Called every frame
-void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+void UGrabber::Grab() {
+	UE_LOG(LogTemp, Warning, TEXT("Grab key pressed"));
 
-	/// get the player viewpoint
 	APlayerController*  APlayer = GetWorld()->GetFirstPlayerController();
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
@@ -42,11 +54,11 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector()*Reach;
 
-	DrawDebugLine(GetWorld(), 
-		PlayerViewPointLocation, 
-		LineTraceEnd, 
-		FColor(255,0,0), 
-		false, 0, 0, 
+	DrawDebugLine(GetWorld(),
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FColor(255, 0, 0),
+		false, 0, 0,
 		12.333);
 
 	/// setup query parameters
@@ -67,6 +79,15 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	if (ActorHit) {
 		UE_LOG(LogTemp, Warning, TEXT("Line trace hit: %s"), *(ActorHit->GetName()));
 	}
+}
+
+// Called every frame
+void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	/// get the player viewpoint
+	
 
 	///see what we hit
 	

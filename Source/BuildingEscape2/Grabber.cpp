@@ -52,6 +52,7 @@ void UGrabber::SetUpInputComponent()
 	}
 }
 
+// Return the physics body in reach 
 FHitResult UGrabber::GetFirstPhysicsBodyInRerach() const
 {
 	//DrawDebugLine(GetWorld(),
@@ -77,6 +78,7 @@ FHitResult UGrabber::GetFirstPhysicsBodyInRerach() const
 	return (Hit);
 }
 
+// Return the end of grab reach
 FVector UGrabber::GetLineTraceEnd() const
 {
 	APlayerController*  APlayer = GetWorld()->GetFirstPlayerController();
@@ -87,6 +89,7 @@ FVector UGrabber::GetLineTraceEnd() const
 	return (PlayerViewPointLocation + PlayerViewPointRotation.Vector()*Reach);
 }
 
+// Returns the playerview point position
 FVector UGrabber::GetLineTraceStart() const
 {
 	APlayerController*  APlayer = GetWorld()->GetFirstPlayerController();
@@ -97,6 +100,7 @@ FVector UGrabber::GetLineTraceStart() const
 	return (PlayerViewPointLocation);
 }
 
+// Release the component held
 void UGrabber::Release() {
 	UE_LOG(LogTemp, Warning, TEXT("Grab key released"));
 	// Release physics handle

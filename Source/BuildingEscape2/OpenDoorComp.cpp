@@ -31,12 +31,13 @@ void UOpenDoorComp::BeginPlay()
 
 void UOpenDoorComp::OpenDoor() {
 	
-	Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
+	OnOpenRequest.Broadcast();
+	//Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
 }
 
 void UOpenDoorComp::CloseDoor() {
 
-	Owner->SetActorRotation(FRotator(0.0f, 0.0f, 0.0f));
+	//Owner->SetActorRotation(FRotator(0.0f, 0.0f, 0.0f));
 }
 
 float UOpenDoorComp::GetTotalMassOfActorsOnPlate()

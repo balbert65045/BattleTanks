@@ -8,6 +8,7 @@
 #include "Engine/TriggerVolume.h"
 #include "OpenDoorComp.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE2_API UOpenDoorComp : public UActorComponent
@@ -29,6 +30,8 @@ public:
 	void OpenDoor();
 	void CloseDoor();
 
+	UPROPERTY(BlueprintAssignable)
+		FOnOpenRequest OnOpenRequest;
 
 private:
 	

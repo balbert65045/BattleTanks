@@ -104,6 +104,7 @@ FVector UGrabber::GetLineTraceStart() const
 void UGrabber::Release() {
 	UE_LOG(LogTemp, Warning, TEXT("Grab key released"));
 	// Release physics handle
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 
 }
@@ -116,6 +117,7 @@ void UGrabber::Grab() {
 	auto Hit = GetFirstPhysicsBodyInRerach();
 	auto ComponentToGrab = Hit.GetComponent();
 	auto ActorHit = Hit.GetActor();
+	if (!PhysicsHandle) { return; }
 	if (ActorHit) {
 		UE_LOG(LogTemp, Warning, TEXT("Line trace hit: %s"), *(ActorHit->GetName()));
 
@@ -137,7 +139,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent) {
 		PhysicsHandle->SetTargetLocation(GetLineTraceEnd());
 	}

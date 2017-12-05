@@ -37,7 +37,7 @@ private:
 		float OpenAngle = 90.0f;
 
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume* PressurePlate;
+		ATriggerVolume* PressurePlate = nullptr;
 
 	
 
@@ -46,7 +46,7 @@ private:
 	
 	float LastDoorOpenTime;
 
-	AActor* Owner;
+	AActor* Owner = nullptr;
 
 	float GetTotalMassOfActorsOnPlate();
 	

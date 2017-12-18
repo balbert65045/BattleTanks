@@ -24,6 +24,7 @@ private:
 	void AimTowardsCrosshair();
 
 	bool GetSightRayHitLocation(FVector&) const;
+<<<<<<< HEAD
 	bool GetLookDirection(FVector&) const;
 	bool GetLookVectorHitLocation(FVector&, FVector)const;
 
@@ -31,6 +32,9 @@ private:
 
 
 
+=======
+	
+>>>>>>> parent of baae862... Player controller getting direction of point area
 	UPROPERTY(EditAnywhere)
 		float CrossHairXLocation = .5f;
 

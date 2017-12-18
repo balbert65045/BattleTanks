@@ -2,9 +2,13 @@
 
 #include "TankPlayerController.h"
 #include "Tank.h"
+<<<<<<< HEAD
 #include "Engine/World.h"
 #include "Public/DrawDebugHelpers.h"
 #include "Gameframework/Actor.h"
+=======
+
+>>>>>>> parent of baae862... Player controller getting direction of point area
 
 void ATankPlayerController::BeginPlay()
 {
@@ -29,14 +33,19 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation)) 
 	{
+<<<<<<< HEAD
 		GetControlledTank()->AimAt(HitLocation);
 		//UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
+=======
+		UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
+>>>>>>> parent of baae862... Player controller getting direction of point area
 	}
 }
 
 // GetWorldLocation of linetrace through crosshair
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
 {
+<<<<<<< HEAD
 	FVector LookDirection;
 	if (GetLookDirection(LookDirection))
 	{
@@ -70,14 +79,19 @@ bool  ATankPlayerController::GetLookVectorHitLocation(FVector& OutHitLocation, F
 }
 
 bool ATankPlayerController::GetLookDirection(FVector& LookDirection) const {
+=======
+>>>>>>> parent of baae862... Player controller getting direction of point area
 	//Find crosshair position
 	int32 ViewPortSizeX, ViewPortSizeY;
 	GetViewportSize(ViewPortSizeX, ViewPortSizeY);
 
 	FVector2D ScreenLocation = FVector2D(ViewPortSizeX * CrossHairXLocation, ViewPortSizeY * CrossHairYLocation);
 
-	FVector WorldLocation;
-	return (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection));
+	//UE_LOG(LogTemp, Warning, TEXT("Screen Location: %s"), *ScreenLocation.ToString());
+	//deproject screen position to a world direction
+	// Line-trace along the look direction (up to max range)
+	OutHitLocation = FVector(0.f, 0.f, 0.f);
+	return true;
 }
 
 ATank* ATankPlayerController::GetControlledTank() const 

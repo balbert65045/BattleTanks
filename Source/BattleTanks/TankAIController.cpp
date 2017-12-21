@@ -28,6 +28,20 @@ void ATankAIController::BeginPlay()
 	//UE_LOG(LogTemp, Warning, TEXT("Player Tank Begin Play"));
 }
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimTowardsPlayer();
+
+}
+
+void ATankAIController::AimTowardsPlayer() const
+{
+	if (GetPlayerTank()) {
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
+
 
 ATank* ATankAIController::GetControlledTank() const
 {
